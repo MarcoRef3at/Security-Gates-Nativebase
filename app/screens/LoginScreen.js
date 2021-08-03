@@ -21,14 +21,12 @@ import authApi from "./../api/auth";
 import AuthContext from "./../auth/context";
 import authStorage from "../auth/storage";
 import Screen from "./../components/Screen";
+import biometricsAuth from "./../auth/biometricsAuth";
 
 const LoginScreen = () => {
   const [formData, setData] = useState({});
   const [errors, setErrors] = useState({});
   const authContext = useContext(AuthContext);
-  const [loginFailed, setLoginFailed] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   const handleSubmit = async ({ username, password }) => {
     validate();
@@ -41,18 +39,20 @@ const LoginScreen = () => {
       let response = result.data["token"] || result.data["error"];
       console.log("response:", response);
       //   if (response == "Invalid password" || response == "Unregistered mail")
-      if (response == "Invalid Password" || response == "Invalid Credentials")
+      if (response == "Invalid Password" || response == "Invalid Credentials") {
+        authContext.setIsAuthourized(false);
         return setErrors({
           ...errors,
           username: "Invalid Credentials",
           password: "Invalid Credentials",
         });
+      }
 
       setErrors({});
 
       // const token = result.data.Cki;
       const token = response;
-      authContext.setToken(token);
+      authContext.setIsAuthourized(true);
       console.log("token:", token);
       authStorage.storeToken(token);
       //   auth.logIn(result.data);
@@ -88,6 +88,18 @@ const LoginScreen = () => {
     }
     return true;
   };
+
+  const restoreToken = async () => {
+    const token = await authStorage.getToken();
+    if (token)
+      await biometricsAuth()
+        .then(() => authContext.setIsAuthourized(true))
+        .catch(() => authContext.setIsAuthourized(false));
+  };
+
+  React.useEffect(() => {
+    restoreToken();
+  }, []);
   return (
     <Screen>
       <Box safeArea flex={1} p={2} w="90%" mx="auto">

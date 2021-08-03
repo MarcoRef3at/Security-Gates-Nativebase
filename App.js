@@ -35,6 +35,7 @@ const theme = extendTheme({
 
 export default function App() {
   const [token, setToken] = useState();
+  const [isAuthourized, setIsAuthourized] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
   const restoreToken = async () => {
@@ -42,24 +43,36 @@ export default function App() {
     if (token) setToken(token);
   };
 
+  const resetValidation = async () => {
+    await authStorage.removeValidationStatus();
+  };
+
+  const restoreValidationStatus = async () => {
+    const validation = await authStorage.getValidationStatus();
+    console.log("validation:", validation);
+    if (validation) setIsValid(validation);
+  };
+
   useEffect(() => {
-    restoreToken();
+    resetValidation();
+    restoreValidationStatus();
+    // restoreToken();
   }, []);
 
   if (!isReady)
     return (
       <AppLoading
-        startAsync={() => restoreToken}
+        startAsync={() => resetValidation}
         onFinish={() => setIsReady(true)}
         onError={console.warn}
       />
     );
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ isAuthourized, setIsAuthourized }}>
       <NavigationContainer>
         <NativeBaseProvider theme={theme}>
-          {token ? <AppNavigator /> : <AuthNavigator />}
+          {isAuthourized ? <AppNavigator /> : <AuthNavigator />}
         </NativeBaseProvider>
       </NavigationContainer>
     </AuthContext.Provider>
