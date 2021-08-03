@@ -1,21 +1,67 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from "react";
+import AppLoading from "expo-app-loading";
+import { NativeBaseProvider, Text, Box, extendTheme } from "native-base";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import AuthContext from "./app/auth/context";
+import authStorage from "./app/auth/storage";
+import AppNavigator from "./app/navigation/AppNavigator";
+import AuthNavigator from "./app/navigation/AuthNavigator";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+// 2. Extend the theme to include custom colors, fonts, etc
+const newColorTheme = {
+  brand: {
+    900: "#8287af",
+    800: "#7c83db",
+    700: "#b3bef6",
+  },
+};
+
+const theme = extendTheme({
+  colors: newColorTheme,
+  components: {
+    Button: {
+      variants: {
+        rounded: ({ colorScheme }) => {
+          return {
+            bg: `${colorScheme}.500`,
+            rounded: "full",
+          };
+        },
+      },
+    },
   },
 });
+
+export default function App() {
+  const [token, setToken] = useState();
+  const [isReady, setIsReady] = useState(false);
+
+  const restoreToken = async () => {
+    const token = await authStorage.getToken();
+    if (token) setToken(token);
+  };
+
+  useEffect(() => {
+    restoreToken();
+  }, []);
+
+  if (!isReady)
+    return (
+      <AppLoading
+        startAsync={() => restoreToken}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    );
+
+  return (
+    <AuthContext.Provider value={{ token, setToken }}>
+      <NavigationContainer>
+        <NativeBaseProvider theme={theme}>
+          {token ? <AppNavigator /> : <AuthNavigator />}
+        </NativeBaseProvider>
+      </NavigationContainer>
+    </AuthContext.Provider>
+  );
+}
