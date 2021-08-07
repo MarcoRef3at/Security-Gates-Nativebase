@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ScreenTest from "../screens/ScreenTest";
+import Scanner from "./../components/Scanner";
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => (
   <Drawer.Navigator initialRouteName="Home">
@@ -17,7 +18,7 @@ const DrawerNavigator = () => (
     />
     <Drawer.Screen
       name="QR Scanner"
-      component={ScreenTest}
+      component={Scanner}
       options={{
         drawerIcon: ({ color, size }) => (
           <MaterialCommunityIcons
