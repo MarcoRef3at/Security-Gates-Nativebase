@@ -7,6 +7,7 @@ import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/storage";
 import AppNavigator from "./app/navigation/AppNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
+import DrawerNavigator from "./app/navigation/DrawerNavigator";
 
 // 2. Extend the theme to include custom colors, fonts, etc
 const newColorTheme = {
@@ -72,7 +73,8 @@ export default function App() {
     <AuthContext.Provider value={{ isAuthourized, setIsAuthourized }}>
       <NavigationContainer>
         <NativeBaseProvider theme={theme}>
-          {isAuthourized ? <AppNavigator /> : <AuthNavigator />}
+          {/* {isAuthourized ? <AppNavigator /> : <AuthNavigator />} */}
+          <DrawerNavigator />
         </NativeBaseProvider>
       </NavigationContainer>
     </AuthContext.Provider>

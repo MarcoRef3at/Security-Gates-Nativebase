@@ -1,24 +1,25 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import ScreenTest from "./../screens/ScreenTest";
-const Tab = createBottomTabNavigator();
-const AppNavigator = () => (
-  <Tab.Navigator>
-    <Tab.Screen
+import ScreenTest from "../screens/ScreenTest";
+const Drawer = createDrawerNavigator();
+const DrawerNavigator = () => (
+  <Drawer.Navigator initialRouteName="Home">
+    <Drawer.Screen
       name="NFC Reader"
       component={ScreenTest}
       options={{
-        tabBarIcon: ({ color, size }) => (
+        drawerIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="nfc" color={color} size={size} />
         ),
       }}
     />
-    <Tab.Screen
+    <Drawer.Screen
       name="QR Scanner"
       component={ScreenTest}
       options={{
-        tabBarIcon: ({ color, size }) => (
+        drawerIcon: ({ color, size }) => (
           <MaterialCommunityIcons
             name="qrcode-scan"
             color={color}
@@ -27,7 +28,7 @@ const AppNavigator = () => (
         ),
       }}
     />
-  </Tab.Navigator>
+  </Drawer.Navigator>
 );
 
-export default AppNavigator;
+export default DrawerNavigator;
