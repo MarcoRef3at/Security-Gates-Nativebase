@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import AppLoading from "expo-app-loading";
-import { NativeBaseProvider, Text, Box, extendTheme } from "native-base";
+import {
+  NativeBaseProvider,
+  Text,
+  Box,
+  extendTheme,
+  themeTools,
+} from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 
 import AuthContext from "./app/auth/context";
@@ -29,6 +35,13 @@ const theme = extendTheme({
             rounded: "full",
           };
         },
+      },
+    },
+    Heading: {
+      baseStyle: (props) => {
+        return {
+          color: themeTools.mode("red.300", "blue.300")(props),
+        };
       },
     },
   },
