@@ -14,7 +14,7 @@ import {
 } from "native-base";
 export default function RecordCard() {
   return (
-    <Box bg="white" shadow={2} rounded="lg" maxWidth="90%">
+    <Box bg="white" shadow={2} rounded="lg" width="100%">
       <Image
         source={{
           uri: "https://sample-example.nativebase.io/static/media/dawki-river.ebbf5434.png",

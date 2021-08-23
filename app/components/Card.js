@@ -30,9 +30,8 @@ export default function ScreenContainer() {
       >
         Until : 22 June 2021
       </Text>
-      <HStack alignItems="center">
-        <RecordCard />
-      </HStack>
+
+      <RecordCard />
     </Stack>
   );
 }
