@@ -1,12 +1,28 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ScreenTest from "../screens/ScreenTest";
 import Scanner from "./../components/Scanner";
 const Drawer = createDrawerNavigator();
+
 const DrawerNavigator = () => (
-  <Drawer.Navigator initialRouteName="Home">
+  <Drawer.Navigator
+    initialRouteName="Home"
+    drawerContent={(props) => {
+      return (
+        <DrawerContentScrollView {...props}>
+          <DrawerItemList {...props} />
+          <DrawerItem label="Logout" onPress={() => console.log("Pressed")} />
+        </DrawerContentScrollView>
+      );
+    }}
+  >
     <Drawer.Screen
       name="NFC Reader"
       component={ScreenTest}

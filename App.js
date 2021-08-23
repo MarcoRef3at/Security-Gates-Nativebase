@@ -86,8 +86,9 @@ export default function App() {
     <AuthContext.Provider value={{ isAuthourized, setIsAuthourized }}>
       <NavigationContainer>
         <NativeBaseProvider theme={theme}>
+          {isAuthourized ? <DrawerNavigator /> : <AuthNavigator />}
           {/* {isAuthourized ? <AppNavigator /> : <AuthNavigator />} */}
-          <DrawerNavigator />
+          {/* <DrawerNavigator /> */}
         </NativeBaseProvider>
       </NavigationContainer>
     </AuthContext.Provider>
