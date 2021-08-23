@@ -1,5 +1,5 @@
 import * as SecureStore from "expo-secure-store";
-import endPoints2 from "../api/endPoints2";
+import endPoints from "../api/endPoints";
 // import jwtDecode from "jwt-decode";
 import client from "./../api/client";
 
@@ -53,7 +53,7 @@ const validateToken = async () => {
       let token = await getToken();
 
       return await client
-        .get(endPoints2.me, {
+        .get(endPoints.me, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

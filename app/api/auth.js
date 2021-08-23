@@ -1,11 +1,11 @@
 import client from "./client";
-import endPoints from "./endPoints2";
+import endPoints from "./endPoints";
 // import endPoints from "./endPoints";
 
 const login = (username, password) => {
   let body = JSON.stringify({
-    username,
-    password,
+    Mail: username,
+    Pswd: password,
   });
   return client.post(endPoints.login, body);
 };

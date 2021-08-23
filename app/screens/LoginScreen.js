@@ -35,11 +35,11 @@ const LoginScreen = () => {
         .login(username, password)
         .catch((e) => e.response);
 
-      //   let response = result.data["Cki"] || result.data["Error"];
-      let response = result.data["token"] || result.data["error"];
+      let response = result.data["Cki"] || result.data["Error"];
+      // let response = result.data["token"] || result.data["error"];
       console.log("response:", response);
-      //   if (response == "Invalid password" || response == "Unregistered mail")
-      if (response == "Invalid Password" || response == "Invalid Credentials") {
+      if (response == "Invalid password" || response == "Unregistered mail") {
+        // if (response == "Invalid Password" || response == "Invalid Credentials") {
         authContext.setIsAuthourized(false);
         return setErrors({
           ...errors,
@@ -50,8 +50,8 @@ const LoginScreen = () => {
 
       setErrors({});
 
-      // const token = result.data.Cki;
-      const token = response;
+      const token = result.data.Cki;
+      // const token = response;
       authContext.setIsAuthourized(true);
       console.log("token:", token);
       authStorage.storeToken(token);
@@ -89,6 +89,8 @@ const LoginScreen = () => {
     return true;
   };
 
+  //If Token Found in cookies
+  // Refresh Token by biometric FingerPrint
   const restoreToken = async () => {
     const token = await authStorage.getToken();
     if (token)
