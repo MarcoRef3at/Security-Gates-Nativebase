@@ -46,6 +46,11 @@ const theme = extendTheme({
     },
   },
 });
+const config = {
+  dependencies: {
+    "linear-gradient": require("expo-linear-gradient").LinearGradient,
+  },
+};
 
 export default function App() {
   const [token, setToken] = useState();
@@ -85,10 +90,10 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ isAuthourized, setIsAuthourized }}>
       <NavigationContainer>
-        <NativeBaseProvider theme={theme}>
-          {isAuthourized ? <DrawerNavigator /> : <AuthNavigator />}
+        <NativeBaseProvider theme={theme} config={config}>
+          {/* {isAuthourized ? <DrawerNavigator /> : <AuthNavigator />} */}
           {/* {isAuthourized ? <AppNavigator /> : <AuthNavigator />} */}
-          {/* <DrawerNavigator /> */}
+          <DrawerNavigator />
         </NativeBaseProvider>
       </NavigationContainer>
     </AuthContext.Provider>
