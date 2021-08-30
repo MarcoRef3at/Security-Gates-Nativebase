@@ -13,7 +13,7 @@ import {
   Container,
   Heading,
   HStack,
-  VStack,
+  VStack
 } from "native-base";
 const ScreenTest = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -24,8 +24,7 @@ const ScreenTest = () => {
       <Text mt={20} fontSize="xl" fontWeight="bold">
         Unit Name{" "}
       </Text>
-      <HStack space={1}>
-        {/* <Button
+      {/* <Button
         colorScheme={colorMode === "light" ? "blue" : "red"}
         onPress={() => {
           toggleColorMode();
@@ -33,25 +32,24 @@ const ScreenTest = () => {
       >
         Change mode
       </Button> */}
-        <Box
-          bg="primary.400"
-          size={20}
-          width="90%"
-          height="10"
-          rounded="lg"
-          shadow={3}
-          mt={5}
-          p={3}
-          _text={{
-            fontSize: "md",
-            fontWeight: "bold",
-            color: "white",
-            alignSelf: "center",
-          }}
-        >
-          Owner Name
-        </Box>
-      </HStack>
+      <Box
+        bg="primary.400"
+        rounded="lg"
+        shadow={3}
+        mt={5}
+        p={3}
+        _text={{
+          fontSize: "md",
+          fontWeight: "bold",
+          color: "white",
+          alignSelf: "center"
+        }}
+      >
+        Owner Name
+      </Box>
+      <Container flex={0.8}>
+        <ScreenContainer />
+      </Container>
     </LocalWrapper>
   );
 };
@@ -70,15 +68,12 @@ const LocalWrapper = ({ children }) => {
           linearGradient: {
             colors: ["lightBlue.300", "violet.800"],
             start: [0, 0],
-            end: [1, 0],
-          },
+            end: [1, 0]
+          }
         }}
       >
         {children}
       </Center>
-      <Container flex={0.8}>
-        <ScreenContainer />
-      </Container>
     </>
   );
 };

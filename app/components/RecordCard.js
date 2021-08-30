@@ -10,34 +10,34 @@ import {
   Center,
   Box,
   Stack,
-  Heading,
+  Heading
 } from "native-base";
 export default function RecordCard() {
   return (
-    <Box bg="white" shadow={2} rounded="lg" width="100%">
+    <Box shadow={9} rounded="lg">
       <Image
         source={{
-          uri: "https://sample-example.nativebase.io/static/media/dawki-river.ebbf5434.png",
+          uri: "https://egyptconsulate.co.uk/wp-content/uploads/2021/06/NationalID-1.jpg"
         }}
         alt="image base"
         resizeMode="cover"
         height={150}
+        width={350}
         roundedTop="md"
       />
-      <Text bold position="absolute" color="white" top={0} m={[4, 4, 8]}>
+      {/* <Text bold position="absolute" color="white" top={0} m={[4, 4, 8]}>
         NEWS
-      </Text>
+      </Text> */}
       <Stack space={4} p={[4, 4, 8]}>
-        <Text color="gray.400">June 22, 2021</Text>
-        <Heading size={["md", "lg", "md"]} noOfLines={2}>
-          The Stunning Dawki River in Meghalaya is So Clear That Boats Appear
-          Floating in Air
+        <Heading color="black" size={["sm", "md", "sm"]} noOfLines={1}>
+          Name:
         </Heading>
-        <Text lineHeight={[5, 5, 7]} noOfLines={[4, 4, 2]} color="gray.700">
-          With lush green meadows, rivers clear as crystal, pine-covered hills,
-          gorgeous waterfalls, lakes and majestic forests, the mesmerizing.
-          Meghalaya is truly a Nature lover’s paradise…
-        </Text>
+        <Heading color="black" size={["sm", "md", "sm"]} noOfLines={1}>
+          ID:
+        </Heading>
+        <Heading color="black" size={["sm", "md", "sm"]} noOfLines={1}>
+          Job:
+        </Heading>
       </Stack>
     </Box>
   );
