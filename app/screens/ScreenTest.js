@@ -21,7 +21,7 @@ const ScreenTest = () => {
   const variant = useColorModeValue("solid", "outline");
   return (
     <LocalWrapper>
-      <Text mt={20} fontSize="xl" fontWeight="bold">
+      <Text mt={20} fontSize="xl" fontWeight="bold" color="white">
         Unit Name{" "}
       </Text>
       {/* <Button
@@ -66,7 +66,7 @@ const LocalWrapper = ({ children }) => {
         flex={0.2}
         bg={{
           linearGradient: {
-            colors: ["lightBlue.300", "violet.800"],
+            colors: ["#187EA5", "#07C0B6"],
             start: [0, 0],
             end: [1, 0]
           }
